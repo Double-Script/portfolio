@@ -53,9 +53,9 @@ const seedDB = async () => {
     }
 };
 
-app.get('/', async (req,res)=>{
-    res.send("Hello MongoDB");
-})
+// app.get('/', async (req,res)=>{
+//     res.send("Hello MongoDB");
+// })
 
 app.get('/api/projects', async (req, res) => {
     try {
