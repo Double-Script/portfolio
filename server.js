@@ -11,7 +11,7 @@ app.use(express.json());
 
 const Project = require('./model/Project');
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('MongoDB connected...');
         seedDB(); // Call the function to seed the database
@@ -22,9 +22,9 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 const seedDB = async () => {
     const sampleProjects = [
         {
-            logo: 'https://via.placeholder.com/100',
-            title: 'Project One',
-            description: 'This is a description for project one.',
+            logo: 'https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/06/shopping-online.jpg',
+            title: 'Ecommerse Wbsite for Admin page with CRUD implementation',
+            description: 'this is an website with admin panel and admin login where he can manage all the products.',
             linkText: 'View Project',
             link: 'https://github.com/Double-Script/first-project'
         },
@@ -65,6 +65,11 @@ app.get('/api/projects', async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 });
+
+
+if(process.env.NODE_ENV=="production"){
+    app.use(express.static("client/build"));
+}
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
